@@ -32,7 +32,7 @@ function Contato() {
   return (
     <Page>
       <PageIntro
-        index="06"
+
         label="Contato"
         title="Conte-nos, em poucas palavras, do que se trata."
         lead="Pedimos apenas o necessário para retornar o contato com segurança. Documentos e detalhes sensíveis do caso serão tratados depois, por canal reservado."

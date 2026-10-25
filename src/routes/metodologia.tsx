@@ -20,15 +20,14 @@ const steps = [
 function Metodologia() {
   return (
     <Page>
-      <PageIntro index="04" label="Metodologia" title={<>Franqueza técnica antes de qualquer <em className="text-sand">promessa.</em></>} lead="Não prometemos resultados e nem toda demanda será aceita. O que oferecemos é uma análise séria dos fatos e uma explicação honesta sobre o que é possível." />
+      <PageIntro label="Metodologia" title={<>Franqueza técnica antes de qualquer <em className="text-sand">promessa.</em></>} lead="Não prometemos resultados e nem toda demanda será aceita. O que oferecemos é uma análise séria dos fatos e uma explicação honesta sobre o que é possível." />
       <section className="container-ed py-24 md:py-32">
-        <SectionHead index="i." label="Etapas" title="O que esperar da avaliação." />
+        <SectionHead label="Etapas" title="O que esperar da avaliação." />
         <ol className="mt-14">
           {steps.map((s, i) => (
             <Reveal as="li" key={s.t} className="grid gap-4 border-t py-10 md:grid-cols-12">
-              <span className="numeral text-3xl md:col-span-2">{String(i + 1).padStart(2, "0")}</span>
-              <h3 className="text-2xl md:col-span-4">{s.t}</h3>
-              <p className="text-muted-foreground md:col-span-6">{s.d}</p>
+              <h3 className="text-2xl md:col-span-5">{s.t}</h3>
+              <p className="text-muted-foreground md:col-span-7">{s.d}</p>
             </Reveal>
           ))}
         </ol>

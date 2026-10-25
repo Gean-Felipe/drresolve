@@ -6,7 +6,7 @@ export const Route = createFileRoute("/defesa-patrimonial")({
   head: () => seo("Defesa Patrimonial", "Atuação jurídica em situações envolvendo imóveis, bens e atos de constrição judicial, com análise técnica e dentro dos limites da lei."),
   component: () => (
     <TopicPage
-      index="03"
+
       label="Defesa patrimonial"
       title={<>Defender o patrimônio dentro do que a <em className="text-sand">lei</em> permite.</>}
       lead="Analisamos situações em que imóveis, maquinário ou outros bens estão sujeitos a penhora, avaliação ou leilão judicial, verificando se houve irregularidades e quais defesas são cabíveis."

@@ -11,7 +11,7 @@ export const Route = createFileRoute("/advocacia-empresarial")({
     ),
   component: () => (
     <EditorialTopicPage
-      index="01"
+
       label="Advocacia empresarial"
       title={
         <>

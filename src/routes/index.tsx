@@ -12,10 +12,10 @@ export const Route = createFileRoute("/")({
 });
 
 const areas = [
-  { n: "01", to: "/advocacia-empresarial", title: "Advocacia empresarial", text: "Contratos, passivos, execuções fiscais, demandas trabalhistas e relações bancárias de pequenas e médias empresas.", tags: ["Contratos", "Execuções fiscais", "Relações bancárias"] },
-  { n: "02", to: "/direito-rural", title: "Direito rural e crédito rural", text: "Questões envolvendo contratos rurais, financiamentos, cédulas de crédito e execuções ligadas à atividade agrícola.", tags: ["Crédito rural", "Contratos rurais", "Execuções"] },
-  { n: "03", to: "/defesa-patrimonial", title: "Defesa patrimonial", text: "Análise de situações envolvendo imóveis, maquinário e atos de constrição judicial, dentro dos limites da lei.", tags: ["Imóveis", "Penhora", "Leilões judiciais"] },
-  { n: "04", to: "/contato", title: "Recuperação de crédito", text: "Avaliação de valores a receber e dos caminhos jurídicos possíveis para sua cobrança. Escopo a confirmar.", tags: ["A confirmar"] },
+  { to: "/advocacia-empresarial", title: "Advocacia empresarial", text: "Contratos, passivos, execuções fiscais, demandas trabalhistas e relações bancárias de pequenas e médias empresas.", tags: ["Contratos", "Execuções fiscais", "Relações bancárias"] },
+  { to: "/direito-rural", title: "Direito rural e crédito rural", text: "Questões envolvendo contratos rurais, financiamentos, cédulas de crédito e execuções ligadas à atividade agrícola.", tags: ["Crédito rural", "Contratos rurais", "Execuções"] },
+  { to: "/defesa-patrimonial", title: "Defesa patrimonial", text: "Análise de situações envolvendo imóveis, maquinário e atos de constrição judicial, dentro dos limites da lei.", tags: ["Imóveis", "Penhora", "Leilões judiciais"] },
+  { to: "/contato", title: "Recuperação de crédito", text: "Avaliação de valores a receber e dos caminhos jurídicos possíveis para sua cobrança. Escopo a confirmar.", tags: ["A confirmar"] },
 ] as const;
 
 const steps = [
@@ -75,9 +75,7 @@ function Index() {
       <section className="container-ed py-24 md:py-36">
         <div className="grid gap-12 md:grid-cols-12">
           <Reveal className="md:col-span-4 lg:col-span-3">
-            <p className="eyebrow text-muted-foreground">
-              <span className="numeral mr-3 text-base normal-case tracking-normal">i.</span>Como trabalhamos
-            </p>
+            <p className="eyebrow text-muted-foreground">Como trabalhamos</p>
           </Reveal>
           <Reveal className="md:col-span-8 lg:col-span-9" delay={80}>
             <p className="font-serif text-[clamp(1.6rem,3vw,2.5rem)] leading-[1.25] text-coffee text-justify [text-justify:inter-word] w-full">
@@ -145,16 +143,15 @@ function Index() {
 
       {/* Áreas */}
       <section id="atuacao" className="container-ed scroll-mt-24 py-24 md:py-36">
-        <SectionHead index="ii." label="Áreas de atuação" title="Frentes de trabalho definidas, com escopo claro." />
+        <SectionHead label="Áreas de atuação" title="Frentes de trabalho definidas, com escopo claro." />
         <ul className="mt-16 border-t divide-y">
           {areas.map((a, i) => (
-            <Reveal as="li" key={a.n} delay={i * 60}>
+            <Reveal as="li" key={a.title} delay={i * 60}>
               <Link
                 to={a.to}
                 className="group grid gap-4 py-10 transition-all duration-300 hover:bg-card/80 hover:px-6 rounded-sm md:grid-cols-12 md:items-baseline"
               >
-                <span className="numeral text-2xl md:col-span-1">{a.n}</span>
-                <h3 className="text-2xl md:text-3xl md:col-span-4 transition-colors group-hover:text-coffee">{a.title}</h3>
+                <h3 className="text-2xl md:text-3xl md:col-span-5 transition-colors group-hover:text-coffee">{a.title}</h3>
                 <div className="md:col-span-6">
                   <p className="text-muted-foreground leading-relaxed">{a.text}</p>
                   <div className="mt-4 flex flex-wrap gap-2">
@@ -170,7 +167,7 @@ function Index() {
                 </div>
                 <span
                   aria-hidden
-                  className="text-xl text-sand transition-transform duration-300 group-hover:translate-x-2 md:col-span-1 md:text-right"
+                  className="text-xl text-sand transition-transform duration-300 group-hover:translate-x-2 md:text-right"
                 >
                   →
                 </span>
@@ -184,9 +181,7 @@ function Index() {
       <section className="bg-olive text-on-dark">
         <div className="container-ed grid gap-16 py-24 md:grid-cols-12 md:py-36">
           <div className="md:col-span-5">
-            <p className="eyebrow text-sand">
-              <span className="numeral mr-3 text-base normal-case tracking-normal">iii.</span>Metodologia
-            </p>
+            <p className="eyebrow text-sand">Metodologia</p>
             <h2 className="h-section mt-6">Um processo transparente, do primeiro contato à decisão.</h2>
             <div className="img-frame mt-10 hidden overflow-hidden rounded-sm border border-line-dark shadow-xl md:block">
               <img
@@ -201,8 +196,7 @@ function Index() {
           </div>
           <ol className="md:col-span-6 md:col-start-7">
             {steps.map((s, i) => (
-              <Reveal as="li" key={s} delay={i * 70} className="grid grid-cols-[3rem_1fr] gap-4 border-b border-line-dark py-7 first:border-t">
-                <span className="numeral text-xl">{String(i + 1).padStart(2, "0")}</span>
+              <Reveal as="li" key={s} delay={i * 70} className="border-b border-line-dark py-7 first:border-t">
                 <span className="text-lg leading-relaxed">{s}</span>
               </Reveal>
             ))}
@@ -222,7 +216,7 @@ function Index() {
 
       {/* Institucional */}
       <section className="container-ed py-24 md:py-36">
-        <SectionHead index="iv." label="O escritório" title="Dr. Resolve — Advocacia e Consultoria Estratégica." />
+        <SectionHead label="O escritório" title="Dr. Resolve — Advocacia e Consultoria Estratégica." />
         <div className="mt-14 grid gap-10 md:grid-cols-12 md:items-start">
           <Reveal className="md:col-span-7 lg:col-span-6 lg:col-start-4">
             <p className="text-base md:text-lg leading-relaxed text-muted-foreground text-justify [text-justify:inter-word]">
@@ -241,7 +235,7 @@ function Index() {
       {/* Conteúdo */}
       <section className="border-t bg-card/60">
         <div className="container-ed py-24 md:py-32">
-          <SectionHead index="v." label="Conteúdo jurídico" title="Análises informativas, em preparação." />
+          <SectionHead label="Conteúdo jurídico" title="Análises informativas, em preparação." />
           <ul className="mt-14 grid gap-4 sm:grid-cols-2 md:grid-cols-4">
             {["Crédito rural", "Contratos empresariais", "Execuções e constrição patrimonial", "Prevenção e organização documental"].map((t) => (
               <li

@@ -11,7 +11,7 @@ export const Route = createFileRoute("/direito-rural")({
     ),
   component: () => (
     <EditorialTopicPage
-      index="02"
+
       label="Direito rural e crédito rural"
       title={
         <>

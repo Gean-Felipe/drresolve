@@ -46,11 +46,7 @@ export function EditorialTopicPage({
           <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-12 xl:gap-14">
             {/* Coluna de Conteúdo Textual (Esquerda) */}
             <div className="flex flex-col justify-center lg:col-span-7 xl:col-span-7">
-              <div className="mb-5 flex items-center gap-3.5">
-                <span className="numeral select-none font-serif text-3xl italic text-sand/90 md:text-4xl">
-                  {index}
-                </span>
-                <span className="h-4 w-px bg-sand/35" aria-hidden="true" />
+              <div className="mb-4">
                 <p className="eyebrow text-sand">{label}</p>
               </div>
 
@@ -95,7 +91,7 @@ export function EditorialTopicPage({
 
       {/* Seção: Situações frequentes */}
       <section className="container-ed py-20 md:py-28 lg:py-32">
-        <SectionHead index="i." label="Situações" title={situationsTitle} />
+        <SectionHead label="Situações" title={situationsTitle} />
         <div className="mt-12 grid gap-6 sm:grid-cols-2 md:mt-16">
           {situations.map((s, i) => (
             <Reveal
@@ -103,10 +99,7 @@ export function EditorialTopicPage({
               delay={(i % 2) * 80}
               className="group flex flex-col justify-start rounded-sm border border-border/70 bg-card p-7 shadow-xs transition-all duration-300 hover:border-sand/60 hover:shadow-md md:p-9"
             >
-              <span className="numeral font-serif text-2xl text-sand/90">
-                {String(i + 1).padStart(2, "0")}
-              </span>
-              <h3 className="mt-3.5 text-left font-serif text-xl font-normal leading-snug text-foreground md:text-2xl">
+              <h3 className="text-left font-serif text-xl font-normal leading-snug text-foreground md:text-2xl">
                 {s.title}
               </h3>
               <p className="mt-3 font-sans text-sm leading-relaxed text-muted-foreground md:text-base text-justify [text-justify:inter-word] w-full">
@@ -122,7 +115,6 @@ export function EditorialTopicPage({
         <section className="border-y border-border/70 bg-card/60">
           <div className="container-ed py-20 md:py-28">
             <SectionHead
-              index="ii."
               label="Termos explicados"
               title="O que significam algumas palavras que aparecem nos processos."
             />

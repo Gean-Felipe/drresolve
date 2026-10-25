@@ -18,7 +18,7 @@ function Conteudo() {
   const lista = artigos.filter((a) => cat === "Todos" || a.categoria === cat);
   return (
     <Page>
-      <PageIntro index="05" label="Conteúdo jurídico" title="Informação jurídica revisada, organizada por assunto." lead="Textos de caráter informativo, escritos e revisados pela equipe do escritório. Eles não substituem a análise individual de cada caso." />
+      <PageIntro label="Conteúdo jurídico" title="Informação jurídica revisada, organizada por assunto." lead="Textos de caráter informativo, escritos e revisados pela equipe do escritório. Eles não substituem a análise individual de cada caso." />
       <section className="container-ed py-20 md:py-28">
         <div role="group" aria-label="Filtrar por assunto" className="flex flex-wrap gap-2.5 border-b border-border pb-8">
           {categorias.map((c) => (
@@ -39,7 +39,7 @@ function Conteudo() {
         </div>
         {lista.length === 0 ? (
           <div className="py-24 text-center my-6 rounded-sm border border-dashed border-border/80 bg-card/40 p-8">
-            <p className="numeral text-4xl font-serif italic text-sand">—</p>
+            <p className="text-4xl font-serif italic text-sand">—</p>
             <p className="mt-4 font-serif text-3xl text-foreground">Os primeiros textos estão em preparação.</p>
             <p className="mx-auto mt-3 max-w-md text-base leading-relaxed text-muted-foreground">
               Os artigos e análises jurídicas serão publicados após revisão profissional e homologação do conselho editorial.

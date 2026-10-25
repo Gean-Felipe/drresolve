@@ -131,11 +131,6 @@
   font-weight: 500;
 }
 
-@utility numeral {
-  font-family: var(--font-serif);
-  font-style: italic;
-  color: var(--sand);
-}
 
 @utility display {
   font-size: clamp(2.6rem, 6.2vw, 5.4rem);

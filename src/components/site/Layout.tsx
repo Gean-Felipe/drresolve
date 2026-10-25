@@ -178,42 +178,32 @@ export function Page({ children, overlay = false }: { children: ReactNode; overl
 }
 
 export function PageIntro({
-  index,
+  index: _index,
   label,
   title,
   lead,
 }: {
-  index: string;
+  index?: string;
   label: string;
   title: ReactNode;
   lead: string;
 }) {
   return (
-    <section className="bg-olive pt-36 pb-20 text-on-dark md:pt-44 md:pb-28">
-      <div className="container-ed grid gap-8 md:grid-cols-12 md:items-baseline">
-        <div className="md:col-span-2">
-          <span className="numeral text-4xl font-serif italic text-sand/90">{index}</span>
-        </div>
-        <div className="md:col-span-10">
-          <p className="eyebrow text-sand">{label}</p>
-          <h1 className="mt-4 text-[clamp(2.4rem,5vw,4.4rem)] leading-[1.08] tracking-tight">{title}</h1>
-          <p className="mt-6 w-full text-lg leading-relaxed text-on-dark-muted text-justify [text-justify:inter-word]">{lead}</p>
-        </div>
+    <section className="bg-olive pt-32 pb-16 text-on-dark md:pt-40 md:pb-24">
+      <div className="container-ed">
+        <p className="eyebrow text-sand">{label}</p>
+        <h1 className="mt-4 text-[clamp(2.4rem,5vw,4.4rem)] leading-[1.08] tracking-tight">{title}</h1>
+        <p className="mt-6 w-full text-lg leading-relaxed text-on-dark-muted text-justify [text-justify:inter-word]">{lead}</p>
       </div>
     </section>
   );
 }
 
-export function SectionHead({ index, label, title }: { index: string; label: string; title: ReactNode }) {
+export function SectionHead({ index: _index, label, title }: { index?: string; label: string; title: ReactNode }) {
   return (
-    <div className="grid gap-6 md:grid-cols-12 md:items-baseline">
-      <div className="md:col-span-4 lg:col-span-3">
-        <p className="eyebrow text-muted-foreground">
-          <span className="numeral mr-3 text-base normal-case tracking-normal">{index}</span>
-          {label}
-        </p>
-      </div>
-      <h2 className="h-section md:col-span-8 lg:col-span-9">{title}</h2>
+    <div className="flex flex-col gap-3">
+      <p className="eyebrow text-muted-foreground">{label}</p>
+      <h2 className="h-section">{title}</h2>
     </div>
   );
 }
