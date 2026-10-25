@@ -58,7 +58,7 @@ export function EditorialTopicPage({
                 {title}
               </h1>
 
-              <p className="max-w-xl text-left font-sans text-base leading-relaxed text-on-dark-muted hyphens-auto sm:text-lg lg:text-[1.125rem] md:text-justify [text-justify:inter-word]">
+              <p className="max-w-xl font-sans text-base leading-relaxed text-on-dark-muted hyphens-auto sm:text-lg lg:text-[1.125rem] text-justify [text-justify:inter-word]">
                 {lead}
               </p>
             </div>
@@ -109,7 +109,7 @@ export function EditorialTopicPage({
               <h3 className="mt-3.5 text-left font-serif text-xl font-normal leading-snug text-foreground md:text-2xl">
                 {s.title}
               </h3>
-              <p className="mt-3 text-left font-sans text-sm leading-relaxed text-muted-foreground hyphens-auto md:text-base md:text-justify [text-justify:inter-word]">
+              <p className="mt-3 font-sans text-sm leading-relaxed text-muted-foreground hyphens-auto md:text-base text-justify [text-justify:inter-word]">
                 {s.text}
               </p>
             </Reveal>
@@ -132,7 +132,7 @@ export function EditorialTopicPage({
                   <dt className="text-left font-serif text-xl font-medium tracking-tight text-foreground">
                     {g.title}
                   </dt>
-                  <dd className="mt-2.5 text-left font-sans text-sm leading-relaxed text-muted-foreground hyphens-auto md:text-base md:text-justify [text-justify:inter-word]">
+                  <dd className="mt-2.5 font-sans text-sm leading-relaxed text-muted-foreground hyphens-auto md:text-base text-justify [text-justify:inter-word]">
                     {g.text}
                   </dd>
                 </div>
@@ -147,7 +147,7 @@ export function EditorialTopicPage({
       {/* Seção: Nota Legal e Limitações */}
       <section className="container-ed py-14 md:py-16">
         <div className="mx-auto max-w-4xl rounded-r-sm border-l-2 border-sand bg-sand/10 p-6 shadow-xs md:p-8">
-          <p className="text-left font-sans text-sm leading-relaxed text-foreground/85 hyphens-auto md:text-base md:text-justify [text-justify:inter-word]">
+          <p className="font-sans text-sm leading-relaxed text-foreground/85 hyphens-auto md:text-base text-justify [text-justify:inter-word]">
             {note}
           </p>
         </div>

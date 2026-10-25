@@ -86,7 +86,12 @@
     -webkit-font-smoothing: antialiased;
   }
   h1, h2, h3 { font-family: var(--font-serif); font-weight: 400; letter-spacing: -0.015em; line-height: 1.08; text-wrap: balance; }
-  p { text-wrap: pretty; }
+  p {
+    text-align: justify;
+    text-justify: inter-word;
+    hyphens: auto;
+    text-wrap: pretty;
+  }
   :focus-visible { outline: 2px solid var(--ring); outline-offset: 3px; }
   .bg-olive :focus-visible, .bg-coffee :focus-visible { outline-color: var(--sand); }
   ::selection { background: var(--sand); color: var(--graphite); }
