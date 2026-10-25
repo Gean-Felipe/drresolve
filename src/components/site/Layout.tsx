@@ -1,5 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { useEffect, useState, type ReactNode } from "react";
+import { Menu, X } from "lucide-react";
 
 const nav = [
   { to: "/advocacia-empresarial", label: "Empresarial" },
@@ -11,9 +12,9 @@ const nav = [
 
 export function Wordmark({ className = "" }: { className?: string }) {
   return (
-    <span className={`font-serif text-[1.45rem] leading-none tracking-tight ${className}`}>
+    <span className={`font-serif text-[1.45rem] leading-none tracking-tight inline-flex items-baseline ${className}`}>
       Dr. Resolve
-      <span className="ml-2 hidden align-middle font-sans text-[0.62rem] uppercase tracking-[0.18em] opacity-70 sm:inline">
+      <span className="ml-2.5 hidden align-middle font-sans text-[0.62rem] uppercase tracking-[0.18em] opacity-75 sm:inline font-medium text-sand">
         Advocacia e Consultoria
       </span>
     </span>
@@ -23,22 +24,36 @@ export function Wordmark({ className = "" }: { className?: string }) {
 export function Header({ overlay = false }: { overlay?: boolean }) {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+
   useEffect(() => {
-    const on = () => setScrolled(window.scrollY > 40);
+    const on = () => setScrolled(window.scrollY > 30);
     on();
     window.addEventListener("scroll", on, { passive: true });
     return () => window.removeEventListener("scroll", on);
   }, []);
+
+  // Fecha o menu móvel ao redimensionar para telas maiores
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth >= 1024) setOpen(false);
+    };
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   const solid = !overlay || scrolled || open;
+
   return (
     <header
-      className={`fixed inset-x-0 top-0 z-50 transition-colors duration-500 ${
-        solid ? "border-b border-line-dark bg-olive text-on-dark" : "bg-transparent text-on-dark"
+      className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
+        solid
+          ? "border-b border-line-dark bg-olive/95 backdrop-blur-md text-on-dark shadow-sm"
+          : "bg-transparent text-on-dark"
       }`}
     >
-      <div className="container-ed flex h-18 items-center justify-between py-4">
-        <Link to="/" aria-label="Dr. Resolve — página inicial">
-          <Wordmark />
+      <div className="container-ed flex h-20 items-center justify-between">
+        <Link to="/" aria-label="Dr. Resolve — página inicial" className="group flex items-center">
+          <Wordmark className="transition-opacity group-hover:opacity-90" />
         </Link>
         <nav aria-label="Principal" className="hidden items-center gap-8 lg:flex">
           {nav.map((n) => (
@@ -46,35 +61,48 @@ export function Header({ overlay = false }: { overlay?: boolean }) {
               key={n.to}
               to={n.to}
               className="link-line text-sm text-on-dark-muted transition-colors hover:text-on-dark"
-              activeProps={{ className: "text-on-dark" }}
+              activeProps={{ className: "!text-on-dark font-medium after:content-[''] after:block after:h-[1px] after:bg-sand after:mt-0.5" }}
             >
               {n.label}
             </Link>
           ))}
           <Link
             to="/contato"
-            className="border border-sand px-5 py-2.5 text-sm text-on-dark transition-colors hover:bg-sand hover:text-graphite"
+            className="border border-sand/80 px-5 py-2.5 text-sm font-medium text-on-dark transition-all duration-200 hover:bg-sand hover:text-graphite hover:border-sand shadow-sm"
           >
             Contato
           </Link>
         </nav>
         <button
           type="button"
-          className="min-h-11 px-2 text-sm lg:hidden"
+          className="flex items-center gap-2 rounded-sm border border-line-dark bg-olive/40 px-3 py-2 text-sm text-on-dark transition-colors hover:bg-olive hover:border-sand/60 lg:hidden focus-visible:outline-2 focus-visible:outline-sand"
           aria-expanded={open}
           aria-controls="menu-mobile"
+          aria-label={open ? "Fechar menu" : "Abrir menu de navegação"}
           onClick={() => setOpen((o) => !o)}
         >
-          {open ? "Fechar" : "Menu"}
+          {open ? <X className="h-4 w-4 text-sand" /> : <Menu className="h-4 w-4 text-sand" />}
+          <span className="text-xs font-medium uppercase tracking-wider">{open ? "Fechar" : "Menu"}</span>
         </button>
       </div>
+
       {open && (
-        <nav id="menu-mobile" aria-label="Principal" className="container-ed border-t border-line-dark pb-8 lg:hidden">
-          <ul className="flex flex-col">
+        <nav
+          id="menu-mobile"
+          aria-label="Principal móvel"
+          className="container-ed max-h-[calc(100svh-5rem)] overflow-y-auto border-t border-line-dark bg-olive/98 backdrop-blur-lg pb-10 pt-4 shadow-2xl lg:hidden animate-in fade-in slide-in-from-top-2 duration-200"
+        >
+          <ul className="flex flex-col divide-y divide-line-dark">
             {[...nav, { to: "/contato", label: "Contato" } as const].map((n) => (
-              <li key={n.to} className="border-b border-line-dark">
-                <Link to={n.to} onClick={() => setOpen(false)} className="block py-4 font-serif text-2xl">
-                  {n.label}
+              <li key={n.to}>
+                <Link
+                  to={n.to}
+                  onClick={() => setOpen(false)}
+                  className="flex items-center justify-between py-4 font-serif text-2xl text-on-dark transition-colors hover:text-sand"
+                  activeProps={{ className: "text-sand font-medium" }}
+                >
+                  <span>{n.label}</span>
+                  <span className="text-sm font-sans text-sand/60">→</span>
                 </Link>
               </li>
             ))}
@@ -91,8 +119,8 @@ export function Footer() {
       <div className="container-ed grid gap-12 py-20 md:grid-cols-12">
         <div className="md:col-span-5">
           <Wordmark />
-          <p className="mt-6 max-w-sm text-sm text-on-dark-muted">
-            Advocacia e consultoria estratégica para produtores rurais, empresários e gestores.
+          <p className="mt-6 max-w-sm text-sm leading-relaxed text-on-dark-muted">
+            Advocacia e consultoria estratégica para produtores rurais, empresários e gestores, com atuação técnica, preventiva e contenciosa.
           </p>
         </div>
         <div className="md:col-span-3">
@@ -107,17 +135,27 @@ export function Footer() {
         <div className="md:col-span-4">
           <p className="eyebrow text-sand">Informações institucionais</p>
           <ul className="mt-5 space-y-3 text-sm text-on-dark-muted">
-            <li>Inscrição OAB: <span className="text-sand">[a confirmar]</span></li>
-            <li>Endereço: <span className="text-sand">[a confirmar]</span></li>
-            <li><Link to="/contato" className="link-line hover:text-on-dark">Solicitar contato</Link></li>
+            <li className="flex items-center gap-2">
+              <span>Inscrição OAB:</span>
+              <span className="inline-flex items-center rounded px-2 py-0.5 text-xs font-mono font-medium tracking-wide bg-sand/15 text-sand border border-sand/30">A confirmar</span>
+            </li>
+            <li className="flex items-center gap-2">
+              <span>Endereço:</span>
+              <span className="inline-flex items-center rounded px-2 py-0.5 text-xs font-mono font-medium tracking-wide bg-sand/15 text-sand border border-sand/30">A confirmar</span>
+            </li>
+            <li className="pt-1">
+              <Link to="/contato" className="link-line hover:text-on-dark text-sand font-medium">Solicitar contato direto →</Link>
+            </li>
           </ul>
         </div>
       </div>
       <div className="border-t border-line-dark">
-        <p className="container-ed py-6 text-xs leading-relaxed text-on-dark-muted">
-          Conteúdo de caráter exclusivamente informativo, que não substitui a análise individualizada de cada caso.
-          O contato pelo site não estabelece relação advogado-cliente. Nenhum resultado é garantido.
-        </p>
+        <div className="container-ed flex flex-col md:flex-row md:items-center justify-between gap-4 py-6 text-xs leading-relaxed text-on-dark-muted">
+          <p>© {new Date().getFullYear()} Dr. Resolve — Advocacia e Consultoria Estratégica. Todos os direitos reservados.</p>
+          <p className="max-w-xl text-on-dark-muted/80">
+            Conteúdo de caráter exclusivamente informativo, que não substitui a análise individualizada de cada caso. O contato pelo site não estabelece relação advogado-cliente.
+          </p>
+        </div>
       </div>
     </footer>
   );
@@ -126,7 +164,10 @@ export function Footer() {
 export function Page({ children, overlay = false }: { children: ReactNode; overlay?: boolean }) {
   return (
     <>
-      <a href="#conteudo" className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:bg-paper focus:px-4 focus:py-2">
+      <a
+        href="#conteudo"
+        className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:bg-paper focus:px-4 focus:py-2 focus:text-graphite focus:shadow-md focus:border focus:border-olive"
+      >
         Pular para o conteúdo
       </a>
       <Header overlay={overlay} />
@@ -149,14 +190,14 @@ export function PageIntro({
 }) {
   return (
     <section className="bg-olive pt-36 pb-20 text-on-dark md:pt-44 md:pb-28">
-      <div className="container-ed grid gap-10 md:grid-cols-12">
+      <div className="container-ed grid gap-8 md:grid-cols-12 md:items-baseline">
         <div className="md:col-span-2">
-          <span className="numeral text-3xl">{index}</span>
+          <span className="numeral text-4xl font-serif italic text-sand/90">{index}</span>
         </div>
-        <div className="md:col-span-9">
+        <div className="md:col-span-10">
           <p className="eyebrow text-sand">{label}</p>
-          <h1 className="mt-6 text-[clamp(2.4rem,5vw,4.4rem)]">{title}</h1>
-          <p className="mt-8 max-w-2xl text-lg text-on-dark-muted">{lead}</p>
+          <h1 className="mt-4 text-[clamp(2.4rem,5vw,4.4rem)] leading-[1.08] tracking-tight">{title}</h1>
+          <p className="mt-6 max-w-2xl text-lg leading-relaxed text-on-dark-muted">{lead}</p>
         </div>
       </div>
     </section>
@@ -165,14 +206,14 @@ export function PageIntro({
 
 export function SectionHead({ index, label, title }: { index: string; label: string; title: ReactNode }) {
   return (
-    <div className="grid gap-6 md:grid-cols-12">
-      <div className="md:col-span-3">
+    <div className="grid gap-6 md:grid-cols-12 md:items-baseline">
+      <div className="md:col-span-4 lg:col-span-3">
         <p className="eyebrow text-muted-foreground">
           <span className="numeral mr-3 text-base normal-case tracking-normal">{index}</span>
           {label}
         </p>
       </div>
-      <h2 className="h-section md:col-span-8">{title}</h2>
+      <h2 className="h-section md:col-span-8 lg:col-span-9">{title}</h2>
     </div>
   );
 }
@@ -180,20 +221,20 @@ export function SectionHead({ index, label, title }: { index: string; label: str
 export function ClosingCta() {
   return (
     <section className="bg-coffee text-on-dark">
-      <div className="container-ed grid gap-10 py-24 md:grid-cols-12 md:py-32">
+      <div className="container-ed grid gap-10 py-24 md:grid-cols-12 md:py-32 items-center">
         <h2 className="h-section md:col-span-7">
           Cada situação tem fatos, documentos e riscos próprios. A análise começa por eles.
         </h2>
-        <div className="flex flex-col justify-end gap-6 md:col-span-4 md:col-start-9">
-          <p className="text-on-dark-muted">
+        <div className="flex flex-col justify-end gap-6 md:col-span-5 lg:col-span-4 lg:col-start-9">
+          <p className="text-on-dark-muted leading-relaxed">
             O contato inicial serve para entender a demanda. Ele não representa garantia de contratação ou de resultado.
           </p>
           <Link
             to="/contato"
-            className="group inline-flex w-fit items-center gap-3 border-b border-sand pb-1 text-on-dark"
+            className="group inline-flex w-fit items-center gap-3 border-b border-sand pb-1 text-on-dark transition-all duration-200 hover:border-white hover:text-sand"
           >
-            Solicitar uma análise inicial
-            <span aria-hidden className="transition-transform duration-300 group-hover:translate-x-1">→</span>
+            <span>Solicitar uma análise inicial</span>
+            <span aria-hidden className="transition-transform duration-300 group-hover:translate-x-1.5 text-sand">→</span>
           </Link>
         </div>
       </div>

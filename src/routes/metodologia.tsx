@@ -35,13 +35,24 @@ function Metodologia() {
       </section>
       <section className="bg-coffee text-on-dark">
         <div className="container-ed grid gap-12 py-24 md:grid-cols-12 md:items-center">
-          <div className="img-frame md:col-span-6">
-            <img src={documentos} alt="Documentos organizados sobre uma mesa" width={1408} height={1008} loading="lazy" className="aspect-[4/3] w-full object-cover" />
+          <div className="img-frame overflow-hidden rounded-sm border border-line-dark shadow-xl md:col-span-6">
+            <img
+              src={documentos}
+              alt="Documentos organizados sobre uma mesa"
+              width={1408}
+              height={1008}
+              loading="lazy"
+              className="aspect-[4/3] w-full object-cover transition-transform duration-700 hover:scale-105"
+            />
           </div>
-          <div className="md:col-span-5 md:col-start-8">
+          <div className="md:col-span-6 lg:col-span-5 lg:col-start-8">
             <p className="eyebrow text-sand">Por que os documentos importam</p>
-            <p className="mt-6 font-serif text-3xl leading-snug">A mesma situação pode ter respostas diferentes conforme o que está escrito em cada contrato e em cada processo.</p>
-            <p className="mt-6 text-on-dark-muted">Por isso, a orientação só é dada depois da leitura dos documentos. Para sua segurança, eles são solicitados por canal reservado — nunca por formulário público.</p>
+            <p className="mt-6 font-serif text-3xl leading-snug">
+              A mesma situação pode ter respostas diferentes conforme o que está escrito em cada contrato e em cada processo.
+            </p>
+            <p className="mt-6 text-on-dark-muted leading-relaxed">
+              Por isso, a orientação só é dada depois da leitura dos documentos. Para sua segurança, eles são solicitados por canal reservado — nunca por formulário público.
+            </p>
           </div>
         </div>
       </section>

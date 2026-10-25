@@ -31,34 +31,44 @@ export function TopicPage({
     <Page>
       <PageIntro index={index} label={label} title={title} lead={lead} />
       {image && (
-        <figure className="container-ed -mt-px">
-          <div className="img-frame">
-            <img src={image.src} alt={image.alt} width={image.w} height={image.h} className="aspect-[21/9] w-full object-cover" />
+        <figure className="container-ed -mt-8 md:-mt-12 relative z-20">
+          <div className="img-frame overflow-hidden rounded-sm border border-border/50 shadow-xl bg-card">
+            <img
+              src={image.src}
+              alt={image.alt}
+              width={image.w}
+              height={image.h}
+              className="aspect-[21/9] w-full object-cover transition-transform duration-700 hover:scale-[1.02]"
+            />
           </div>
-          <figcaption className="mt-3 text-xs text-muted-foreground">{image.caption}</figcaption>
+          <figcaption className="mt-3 text-xs text-muted-foreground/80 font-mono tracking-wide">{image.caption}</figcaption>
         </figure>
       )}
       <section className="container-ed py-24 md:py-32">
         <SectionHead index="i." label="Situações" title={situationsTitle} />
-        <div className="mt-14 grid gap-px bg-border md:grid-cols-2">
+        <div className="mt-14 grid gap-6 sm:grid-cols-2">
           {situations.map((s, i) => (
-            <Reveal key={s.title} delay={(i % 2) * 80} className="bg-background p-8 md:p-10">
-              <span className="numeral text-xl">{String(i + 1).padStart(2, "0")}</span>
-              <h3 className="mt-4 text-2xl">{s.title}</h3>
-              <p className="mt-3 text-muted-foreground">{s.text}</p>
+            <Reveal
+              key={s.title}
+              delay={(i % 2) * 80}
+              className="bg-card p-8 md:p-10 rounded-sm border border-border/60 shadow-xs transition-all duration-300 hover:shadow-md hover:border-sand/50"
+            >
+              <span className="numeral text-2xl font-serif">{String(i + 1).padStart(2, "0")}</span>
+              <h3 className="mt-4 text-2xl font-serif text-foreground">{s.title}</h3>
+              <p className="mt-3 text-base leading-relaxed text-muted-foreground">{s.text}</p>
             </Reveal>
           ))}
         </div>
       </section>
       {glossary && (
-        <section className="border-y bg-card">
+        <section className="border-y bg-card/60">
           <div className="container-ed py-24 md:py-32">
             <SectionHead index="ii." label="Termos explicados" title="O que significam algumas palavras que aparecem nos processos." />
-            <dl className="mt-14 grid gap-x-16 md:grid-cols-2">
+            <dl className="mt-14 grid gap-8 md:grid-cols-2">
               {glossary.map((g) => (
-                <div key={g.title} className="border-t py-7">
-                  <dt className="font-serif text-xl">{g.title}</dt>
-                  <dd className="mt-2 text-muted-foreground">{g.text}</dd>
+                <div key={g.title} className="border-t border-border/70 pt-6">
+                  <dt className="font-serif text-xl text-foreground font-medium">{g.title}</dt>
+                  <dd className="mt-2 text-base leading-relaxed text-muted-foreground">{g.text}</dd>
                 </div>
               ))}
             </dl>
@@ -66,8 +76,10 @@ export function TopicPage({
         </section>
       )}
       {children}
-      <section className="container-ed py-20">
-        <p className="mx-auto max-w-3xl border-l-2 border-sand pl-6 text-muted-foreground">{note}</p>
+      <section className="container-ed py-16">
+        <div className="mx-auto max-w-3xl border-l-2 border-sand bg-sand/5 p-6 rounded-r-sm">
+          <p className="text-sm md:text-base leading-relaxed text-muted-foreground">{note}</p>
+        </div>
       </section>
       <ClosingCta />
     </Page>
