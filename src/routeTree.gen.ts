@@ -10,33 +10,115 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AdvocaciaEmpresarialRouteImport } from './routes/advocacia-empresarial'
+import { Route as ContatoRouteImport } from './routes/contato'
+import { Route as ConteudoRouteImport } from './routes/conteudo'
+import { Route as DefesaPatrimonialRouteImport } from './routes/defesa-patrimonial'
+import { Route as DireitoRuralRouteImport } from './routes/direito-rural'
+import { Route as MetodologiaRouteImport } from './routes/metodologia'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdvocaciaEmpresarialRoute = AdvocaciaEmpresarialRouteImport.update({
+  id: '/advocacia-empresarial',
+  path: '/advocacia-empresarial',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContatoRoute = ContatoRouteImport.update({
+  id: '/contato',
+  path: '/contato',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ConteudoRoute = ConteudoRouteImport.update({
+  id: '/conteudo',
+  path: '/conteudo',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DefesaPatrimonialRoute = DefesaPatrimonialRouteImport.update({
+  id: '/defesa-patrimonial',
+  path: '/defesa-patrimonial',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DireitoRuralRoute = DireitoRuralRouteImport.update({
+  id: '/direito-rural',
+  path: '/direito-rural',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MetodologiaRoute = MetodologiaRouteImport.update({
+  id: '/metodologia',
+  path: '/metodologia',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/advocacia-empresarial': typeof AdvocaciaEmpresarialRoute
+  '/contato': typeof ContatoRoute
+  '/conteudo': typeof ConteudoRoute
+  '/defesa-patrimonial': typeof DefesaPatrimonialRoute
+  '/direito-rural': typeof DireitoRuralRoute
+  '/metodologia': typeof MetodologiaRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/advocacia-empresarial': typeof AdvocaciaEmpresarialRoute
+  '/contato': typeof ContatoRoute
+  '/conteudo': typeof ConteudoRoute
+  '/defesa-patrimonial': typeof DefesaPatrimonialRoute
+  '/direito-rural': typeof DireitoRuralRoute
+  '/metodologia': typeof MetodologiaRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/advocacia-empresarial': typeof AdvocaciaEmpresarialRoute
+  '/contato': typeof ContatoRoute
+  '/conteudo': typeof ConteudoRoute
+  '/defesa-patrimonial': typeof DefesaPatrimonialRoute
+  '/direito-rural': typeof DireitoRuralRoute
+  '/metodologia': typeof MetodologiaRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/advocacia-empresarial'
+    | '/contato'
+    | '/conteudo'
+    | '/defesa-patrimonial'
+    | '/direito-rural'
+    | '/metodologia'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/advocacia-empresarial'
+    | '/contato'
+    | '/conteudo'
+    | '/defesa-patrimonial'
+    | '/direito-rural'
+    | '/metodologia'
+  id:
+    | '__root__'
+    | '/'
+    | '/advocacia-empresarial'
+    | '/contato'
+    | '/conteudo'
+    | '/defesa-patrimonial'
+    | '/direito-rural'
+    | '/metodologia'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AdvocaciaEmpresarialRoute: typeof AdvocaciaEmpresarialRoute
+  ContatoRoute: typeof ContatoRoute
+  ConteudoRoute: typeof ConteudoRoute
+  DefesaPatrimonialRoute: typeof DefesaPatrimonialRoute
+  DireitoRuralRoute: typeof DireitoRuralRoute
+  MetodologiaRoute: typeof MetodologiaRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +130,59 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/advocacia-empresarial': {
+      id: '/advocacia-empresarial'
+      path: '/advocacia-empresarial'
+      fullPath: '/advocacia-empresarial'
+      preLoaderRoute: typeof AdvocaciaEmpresarialRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contato': {
+      id: '/contato'
+      path: '/contato'
+      fullPath: '/contato'
+      preLoaderRoute: typeof ContatoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/conteudo': {
+      id: '/conteudo'
+      path: '/conteudo'
+      fullPath: '/conteudo'
+      preLoaderRoute: typeof ConteudoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/defesa-patrimonial': {
+      id: '/defesa-patrimonial'
+      path: '/defesa-patrimonial'
+      fullPath: '/defesa-patrimonial'
+      preLoaderRoute: typeof DefesaPatrimonialRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/direito-rural': {
+      id: '/direito-rural'
+      path: '/direito-rural'
+      fullPath: '/direito-rural'
+      preLoaderRoute: typeof DireitoRuralRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/metodologia': {
+      id: '/metodologia'
+      path: '/metodologia'
+      fullPath: '/metodologia'
+      preLoaderRoute: typeof MetodologiaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AdvocaciaEmpresarialRoute: AdvocaciaEmpresarialRoute,
+  ContatoRoute: ContatoRoute,
+  ConteudoRoute: ConteudoRoute,
+  DefesaPatrimonialRoute: DefesaPatrimonialRoute,
+  DireitoRuralRoute: DireitoRuralRoute,
+  MetodologiaRoute: MetodologiaRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
