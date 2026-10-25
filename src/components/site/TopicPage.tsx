@@ -55,7 +55,7 @@ export function TopicPage({
             >
               <span className="numeral text-2xl font-serif">{String(i + 1).padStart(2, "0")}</span>
               <h3 className="mt-4 text-2xl font-serif text-foreground">{s.title}</h3>
-              <p className="mt-3 text-base leading-relaxed text-muted-foreground text-justify [text-justify:inter-word] hyphens-auto">{s.text}</p>
+              <p className="mt-3 text-base leading-relaxed text-muted-foreground text-justify [text-justify:inter-word] w-full">{s.text}</p>
             </Reveal>
           ))}
         </div>
@@ -68,7 +68,7 @@ export function TopicPage({
               {glossary.map((g) => (
                 <div key={g.title} className="border-t border-border/70 pt-6">
                   <dt className="font-serif text-xl text-foreground font-medium">{g.title}</dt>
-                  <dd className="mt-2 text-base leading-relaxed text-muted-foreground text-justify [text-justify:inter-word] hyphens-auto">{g.text}</dd>
+                  <dd className="mt-2 text-base leading-relaxed text-muted-foreground text-justify [text-justify:inter-word] w-full">{g.text}</dd>
                 </div>
               ))}
             </dl>
@@ -78,7 +78,7 @@ export function TopicPage({
       {children}
       <section className="container-ed py-16">
         <div className="mx-auto max-w-3xl border-l-2 border-sand bg-sand/5 p-6 rounded-r-sm">
-          <p className="text-sm md:text-base leading-relaxed text-muted-foreground text-justify [text-justify:inter-word] hyphens-auto">{note}</p>
+          <p className="text-sm md:text-base leading-relaxed text-muted-foreground text-justify [text-justify:inter-word] w-full">{note}</p>
         </div>
       </section>
       <ClosingCta />

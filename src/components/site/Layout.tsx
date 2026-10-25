@@ -197,7 +197,7 @@ export function PageIntro({
         <div className="md:col-span-10">
           <p className="eyebrow text-sand">{label}</p>
           <h1 className="mt-4 text-[clamp(2.4rem,5vw,4.4rem)] leading-[1.08] tracking-tight">{title}</h1>
-          <p className="mt-6 max-w-2xl text-lg leading-relaxed text-on-dark-muted">{lead}</p>
+          <p className="mt-6 w-full text-lg leading-relaxed text-on-dark-muted text-justify [text-justify:inter-word]">{lead}</p>
         </div>
       </div>
     </section>
@@ -226,7 +226,7 @@ export function ClosingCta() {
           Cada situação tem fatos, documentos e riscos próprios. A análise começa por eles.
         </h2>
         <div className="flex flex-col justify-end gap-6 md:col-span-5 lg:col-span-4 lg:col-start-9">
-          <p className="text-on-dark-muted leading-relaxed">
+          <p className="text-on-dark-muted leading-relaxed text-justify [text-justify:inter-word] w-full">
             O contato inicial serve para entender a demanda. Ele não representa garantia de contratação ou de resultado.
           </p>
           <Link

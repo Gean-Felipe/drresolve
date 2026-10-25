@@ -49,7 +49,7 @@ function Index() {
               </h1>
             </div>
             <div className="flex flex-col justify-end gap-8 md:col-span-5 lg:col-span-4">
-              <p className="text-on-dark-muted leading-relaxed">
+              <p className="text-on-dark-muted leading-relaxed text-justify [text-justify:inter-word]">
                 Atuamos com produtores rurais e empresários em questões de crédito, contratos, execuções e patrimônio — começando sempre pela análise criteriosa dos fatos e documentos.
               </p>
               <div className="flex flex-wrap items-center gap-4">
@@ -80,10 +80,10 @@ function Index() {
             </p>
           </Reveal>
           <Reveal className="md:col-span-8 lg:col-span-9" delay={80}>
-            <p className="font-serif text-[clamp(1.6rem,3vw,2.5rem)] leading-[1.25] text-coffee">
+            <p className="font-serif text-[clamp(1.6rem,3vw,2.5rem)] leading-[1.25] text-coffee text-justify [text-justify:inter-word] w-full">
               Antes de qualquer definição, buscamos compreender os fatos, examinar os documentos e avaliar a viabilidade jurídica da demanda.
             </p>
-            <p className="prose-ed mt-8 text-base md:text-lg leading-relaxed text-muted-foreground">
+            <p className="mt-8 text-base md:text-lg leading-relaxed text-muted-foreground w-full text-justify [text-justify:inter-word]">
               Nem toda situação comporta a mesma resposta — e algumas não comportam medida judicial. Por isso, cada atendimento começa por uma entrevista detalhada e pela leitura técnica do caso. Só então explicamos, com franqueza, quais caminhos existem, quais riscos envolvem e se faz sentido prosseguir.
             </p>
           </Reveal>
@@ -127,7 +127,7 @@ function Index() {
                 </div>
                 <p className="eyebrow text-muted-foreground">Para quem</p>
                 <h2 className="mt-3 text-3xl md:text-4xl">{p.who}</h2>
-                <p className="mt-4 max-w-md text-base leading-relaxed text-muted-foreground">{p.text}</p>
+                <p className="mt-4 w-full text-base leading-relaxed text-muted-foreground text-justify [text-justify:inter-word]">{p.text}</p>
               </div>
               <div>
                 <Link
@@ -225,13 +225,13 @@ function Index() {
         <SectionHead index="iv." label="O escritório" title="Dr. Resolve — Advocacia e Consultoria Estratégica." />
         <div className="mt-14 grid gap-10 md:grid-cols-12 md:items-start">
           <Reveal className="md:col-span-7 lg:col-span-6 lg:col-start-4">
-            <p className="text-base md:text-lg leading-relaxed text-muted-foreground">
+            <p className="text-base md:text-lg leading-relaxed text-muted-foreground text-justify [text-justify:inter-word]">
               Um escritório dedicado a questões que afetam a atividade produtiva e o patrimônio de quem trabalha no campo e na empresa. A atuação combina análise técnica, linguagem acessível e honestidade sobre as possibilidades reais de cada caso.
             </p>
           </Reveal>
           <Reveal className="border-l-2 border-sand pl-6 md:col-span-5 lg:col-span-3" delay={100}>
             <p className="eyebrow text-coffee">Equipe responsável</p>
-            <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+            <p className="mt-3 text-sm leading-relaxed text-muted-foreground text-justify [text-justify:inter-word]">
               Nomes, inscrições na OAB e trajetória profissional serão publicados após validação pelo escritório.
             </p>
           </Reveal>
