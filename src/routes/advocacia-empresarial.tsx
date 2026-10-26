@@ -11,7 +11,6 @@ export const Route = createFileRoute("/advocacia-empresarial")({
     ),
   component: () => (
     <EditorialTopicPage
-
       label="Advocacia empresarial"
       title={
         <>
@@ -53,8 +52,20 @@ export const Route = createFileRoute("/advocacia-empresarial")({
           text: "Avaliação de contratos de financiamento, renegociações e cobranças envolvendo instituições financeiras.",
         },
         {
-          title: "Assessoria preventiva",
-          text: "Orientação contínua para reduzir riscos antes que se transformem em litígio.",
+          highlight: true,
+          eyebrow: "ASSESSORIA JURÍDICA PREVENTIVA",
+          title: "Projeto Anjo da Guarda",
+          subtitle: "Decisões mais seguras começam antes da assinatura.",
+          text: "Uma proposta de acompanhamento jurídico anual para empresários, produtores rurais e pessoas físicas que desejam analisar contratos, avaliar riscos e receber orientação jurídica antes de tomar decisões empresariais ou patrimoniais relevantes.",
+          features: [
+            "Acompanhamento jurídico continuado.",
+            "Análise e revisão prévia de negócios.",
+            "Identificação preventiva de riscos jurídicos.",
+          ],
+          action: {
+            label: "Conhecer o projeto",
+            to: "/contato",
+          },
         },
       ]}
       note="Cada empresa tem uma realidade própria. A atuação é definida após a análise dos documentos e não envolve promessa de resultado."

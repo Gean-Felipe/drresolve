@@ -1,8 +1,23 @@
 import type { ReactNode } from "react";
+import { Link } from "@tanstack/react-router";
+import { ShieldCheck, FileCheck, SearchCheck } from "lucide-react";
 import { Page, SectionHead, ClosingCta } from "./Layout";
 import { Reveal } from "./Reveal";
 
-export type Topic = { title: string; text: string };
+export type SituationAction = {
+  label: string;
+  to: string;
+};
+
+export type Topic = {
+  title: string;
+  text: string;
+  eyebrow?: string;
+  subtitle?: string;
+  features?: string[];
+  action?: SituationAction;
+  highlight?: boolean;
+};
 
 export type EditorialImage = {
   src: string;
@@ -38,6 +53,7 @@ export function EditorialTopicPage({
   note: string;
   children?: ReactNode;
 }) {
+  const featureIcons = [ShieldCheck, FileCheck, SearchCheck];
   return (
     <Page>
       {/* Seção Principal Hero: Editorial Split (Texto à esquerda, Imagem à direita) */}
@@ -93,20 +109,83 @@ export function EditorialTopicPage({
       <section className="container-ed py-20 md:py-28 lg:py-32">
         <SectionHead label="Situações" title={situationsTitle} />
         <div className="mt-12 grid gap-6 sm:grid-cols-2 md:mt-16">
-          {situations.map((s, i) => (
-            <Reveal
-              key={s.title}
-              delay={(i % 2) * 80}
-              className="group flex flex-col justify-start rounded-sm border border-border/70 bg-card p-7 shadow-xs transition-all duration-300 hover:border-sand/60 hover:shadow-md md:p-9"
-            >
-              <h3 className="text-left font-serif text-xl font-normal leading-snug text-foreground md:text-2xl">
-                {s.title}
-              </h3>
-              <p className="mt-3 font-sans text-sm leading-relaxed text-muted-foreground md:text-base text-justify [text-justify:inter-word] w-full">
-                {s.text}
-              </p>
-            </Reveal>
-          ))}
+          {situations.map((s, i) => {
+            if (s.highlight) {
+              return (
+                <Reveal
+                  key={s.title}
+                  delay={(i % 2) * 80}
+                  className="group relative flex flex-col justify-between rounded-sm border border-sand/60 bg-card p-7 shadow-xs transition-all duration-300 hover:border-sand hover:shadow-md md:p-9"
+                >
+                  <div className="flex flex-col">
+                    {s.eyebrow && (
+                      <p className="eyebrow mb-3 text-sand font-medium">
+                        {s.eyebrow}
+                      </p>
+                    )}
+                    <h3 className="text-left font-serif text-xl font-normal leading-snug text-foreground md:text-2xl">
+                      {s.title}
+                    </h3>
+                    {s.subtitle && (
+                      <p className="mt-1.5 font-serif text-base italic text-foreground/90 md:text-[1.0625rem]">
+                        {s.subtitle}
+                      </p>
+                    )}
+                    <p className="mt-3 font-sans text-sm leading-relaxed text-muted-foreground md:text-base text-left">
+                      {s.text}
+                    </p>
+
+                    {s.features && s.features.length > 0 && (
+                      <ul className="mt-5 space-y-2.5 border-t border-border/60 pt-4">
+                        {s.features.map((featureText, idx) => {
+                          const IconComp = featureIcons[idx % featureIcons.length];
+                          return (
+                            <li
+                              key={idx}
+                              className="flex items-start gap-2.5 text-xs sm:text-sm text-foreground/90 font-sans"
+                            >
+                              <IconComp
+                                className="mt-0.5 h-4 w-4 shrink-0 text-sand"
+                                strokeWidth={1.75}
+                                aria-hidden="true"
+                              />
+                              <span>{featureText}</span>
+                            </li>
+                          );
+                        })}
+                      </ul>
+                    )}
+                  </div>
+
+                  {s.action && (
+                    <div className="mt-6 pt-2">
+                      <Link
+                        to={s.action.to}
+                        className="inline-flex items-center justify-center rounded-sm bg-olive px-6 py-2.5 text-sm font-medium text-on-dark transition-all duration-200 hover:bg-coffee hover:shadow-sm focus-visible:outline-2 focus-visible:outline-coffee"
+                      >
+                        {s.action.label}
+                      </Link>
+                    </div>
+                  )}
+                </Reveal>
+              );
+            }
+
+            return (
+              <Reveal
+                key={s.title}
+                delay={(i % 2) * 80}
+                className="group flex flex-col justify-start rounded-sm border border-border/70 bg-card p-7 shadow-xs transition-all duration-300 hover:border-sand/60 hover:shadow-md md:p-9"
+              >
+                <h3 className="text-left font-serif text-xl font-normal leading-snug text-foreground md:text-2xl">
+                  {s.title}
+                </h3>
+                <p className="mt-3 font-sans text-sm leading-relaxed text-muted-foreground md:text-base text-justify [text-justify:inter-word] w-full">
+                  {s.text}
+                </p>
+              </Reveal>
+            );
+          })}
         </div>
       </section>
 
