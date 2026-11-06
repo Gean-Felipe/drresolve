@@ -76,8 +76,7 @@ function ErrorComponent({ error, reset }: ErrorComponentProps) {
   );
 }
 
-const gscVerification =
-  (typeof import.meta !== "undefined" && import.meta.env?.VITE_GOOGLE_SITE_VERIFICATION) || "";
+const gscVerification = "1iUAwD5lzw-H4FJEXbi6vQMJG7E1-GD3305G9lGHuCY";
 
 export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()({
   head: () => ({
