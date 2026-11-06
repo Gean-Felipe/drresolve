@@ -4,15 +4,16 @@ import { Menu, X } from "lucide-react";
 
 const nav = [
   { to: "/advocacia-empresarial", label: "Empresarial" },
-  { to: "/direito-rural", label: "Rural" },
-  { to: "/defesa-patrimonial", label: "Patrimonial" },
+  { to: "/anjo-da-guarda", label: "Anjo da Guarda" },
   { to: "/metodologia", label: "Metodologia" },
   { to: "/conteudo", label: "Conteúdo" },
 ] as const;
 
 export function Wordmark({ className = "" }: { className?: string }) {
   return (
-    <span className={`font-serif text-[1.45rem] leading-none tracking-tight inline-flex items-baseline ${className}`}>
+    <span
+      className={`font-serif text-[1.45rem] leading-none tracking-tight inline-flex items-baseline ${className}`}
+    >
       Dr. Resolve
       <span className="ml-2.5 hidden align-middle font-sans text-[0.62rem] uppercase tracking-[0.18em] opacity-75 sm:inline font-medium text-sand">
         Advocacia e Consultoria
@@ -55,13 +56,19 @@ export function Header({ overlay = false }: { overlay?: boolean }) {
         <Link to="/" aria-label="Dr. Resolve — página inicial" className="group flex items-center">
           <Wordmark className="transition-opacity group-hover:opacity-90" />
         </Link>
-        <nav aria-label="Principal" className="hidden items-center gap-8 lg:flex">
+        <nav
+          aria-label="Principal"
+          className="hidden items-center gap-6 xl:gap-8 whitespace-nowrap lg:flex"
+        >
           {nav.map((n) => (
             <Link
               key={n.to}
               to={n.to}
               className="link-line text-sm text-on-dark-muted transition-colors hover:text-on-dark"
-              activeProps={{ className: "!text-on-dark font-medium after:content-[''] after:block after:h-[1px] after:bg-sand after:mt-0.5" }}
+              activeProps={{
+                className:
+                  "!text-on-dark font-medium after:content-[''] after:block after:h-[1px] after:bg-sand after:mt-0.5",
+              }}
             >
               {n.label}
             </Link>
@@ -82,7 +89,9 @@ export function Header({ overlay = false }: { overlay?: boolean }) {
           onClick={() => setOpen((o) => !o)}
         >
           {open ? <X className="h-4 w-4 text-sand" /> : <Menu className="h-4 w-4 text-sand" />}
-          <span className="text-xs font-medium uppercase tracking-wider">{open ? "Fechar" : "Menu"}</span>
+          <span className="text-xs font-medium uppercase tracking-wider">
+            {open ? "Fechar" : "Menu"}
+          </span>
         </button>
       </div>
 
@@ -120,40 +129,82 @@ export function Footer() {
         <div className="md:col-span-5">
           <Wordmark />
           <p className="mt-6 max-w-sm text-sm leading-relaxed text-on-dark-muted">
-            Advocacia e consultoria estratégica para produtores rurais, empresários e gestores, com atuação técnica, preventiva e contenciosa.
+            Advocacia e consultoria estratégica para produtores rurais, empresários e gestores, com
+            atuação técnica, preventiva e contenciosa.
           </p>
         </div>
         <div className="md:col-span-3">
-          <p className="eyebrow text-sand">Atuação</p>
+          <p className="eyebrow text-sand">Navegação & Atuação</p>
           <ul className="mt-5 space-y-3 text-sm text-on-dark-muted">
-            <li><Link to="/advocacia-empresarial" className="link-line hover:text-on-dark">Advocacia empresarial</Link></li>
-            <li><Link to="/direito-rural" className="link-line hover:text-on-dark">Direito rural e crédito rural</Link></li>
-            <li><Link to="/defesa-patrimonial" className="link-line hover:text-on-dark">Defesa patrimonial</Link></li>
-            <li><Link to="/metodologia" className="link-line hover:text-on-dark">Metodologia</Link></li>
+            <li>
+              <Link to="/advocacia-empresarial" className="link-line hover:text-on-dark">
+                Advocacia empresarial
+              </Link>
+            </li>
+            <li>
+              <Link to="/anjo-da-guarda" className="link-line hover:text-on-dark text-sand">
+                Projeto Anjo da Guarda
+              </Link>
+            </li>
+            <li>
+              <Link to="/metodologia" className="link-line hover:text-on-dark">
+                Metodologia
+              </Link>
+            </li>
+            <li>
+              <Link to="/conteudo" className="link-line hover:text-on-dark">
+                Conteúdo jurídico
+              </Link>
+            </li>
+            <li>
+              <Link to="/contato" className="link-line hover:text-on-dark">
+                Contato
+              </Link>
+            </li>
           </ul>
         </div>
         <div className="md:col-span-4">
           <p className="eyebrow text-sand">Informações institucionais</p>
           <ul className="mt-5 space-y-3 text-sm text-on-dark-muted">
-            <li className="flex items-center gap-2">
-              <span>Inscrição OAB:</span>
-              <span className="inline-flex items-center rounded px-2 py-0.5 text-xs font-mono font-medium tracking-wide bg-sand/15 text-sand border border-sand/30">A confirmar</span>
+            <li className="flex items-start gap-2">
+              <span className="font-medium text-foreground text-on-dark">Telefone / WhatsApp:</span>
+              <a
+                href="https://wa.me/556598110101"
+                target="_blank"
+                rel="noreferrer"
+                className="text-sand hover:text-paper transition-colors"
+              >
+                (65) 9811-0101
+              </a>
             </li>
-            <li className="flex items-center gap-2">
-              <span>Endereço:</span>
-              <span className="inline-flex items-center rounded px-2 py-0.5 text-xs font-mono font-medium tracking-wide bg-sand/15 text-sand border border-sand/30">A confirmar</span>
+            <li className="flex flex-col gap-0.5">
+              <span className="font-medium text-foreground text-on-dark">Endereço:</span>
+              <span className="text-on-dark-muted">
+                Rua Washington, nº 318, Sala 04 — Jardim das Américas
+              </span>
             </li>
-            <li className="pt-1">
-              <Link to="/contato" className="link-line hover:text-on-dark text-sand font-medium">Solicitar contato direto →</Link>
+            <li className="pt-2">
+              <Link
+                to="/contato"
+                className="link-line hover:text-on-dark text-sand font-medium inline-flex items-center gap-1.5"
+              >
+                <span>Solicitar contato direto</span>
+                <span aria-hidden="true">→</span>
+              </Link>
             </li>
           </ul>
         </div>
       </div>
       <div className="border-t border-line-dark">
         <div className="container-ed flex flex-col md:flex-row md:items-center justify-between gap-4 py-6 text-xs leading-relaxed text-on-dark-muted">
-          <p>© {new Date().getFullYear()} Dr. Resolve — Advocacia e Consultoria Estratégica. Todos os direitos reservados.</p>
+          <p>
+            © {new Date().getFullYear()} Dr. Resolve — Advocacia e Consultoria Estratégica. Todos os
+            direitos reservados.
+          </p>
           <p className="max-w-xl text-on-dark-muted/80">
-            Conteúdo de caráter exclusivamente informativo, que não substitui a análise individualizada de cada caso. O contato pelo site não estabelece relação advogado-cliente.
+            Conteúdo de caráter exclusivamente informativo, que não substitui a análise
+            individualizada de cada caso. O contato pelo site não estabelece relação
+            advogado-cliente.
           </p>
         </div>
       </div>
@@ -165,13 +216,13 @@ export function Page({ children, overlay = false }: { children: ReactNode; overl
   return (
     <>
       <a
-        href="#conteudo"
+        href="#main-content"
         className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:bg-paper focus:px-4 focus:py-2 focus:text-graphite focus:shadow-md focus:border focus:border-olive"
       >
         Pular para o conteúdo
       </a>
       <Header overlay={overlay} />
-      <main id="conteudo">{children}</main>
+      <main id="main-content">{children}</main>
       <Footer />
     </>
   );
@@ -192,16 +243,28 @@ export function PageIntro({
     <section className="bg-olive pt-32 pb-16 text-on-dark md:pt-40 md:pb-24">
       <div className="container-ed">
         <p className="eyebrow text-sand">{label}</p>
-        <h1 className="mt-4 text-[clamp(2.4rem,5vw,4.4rem)] leading-[1.08] tracking-tight">{title}</h1>
-        <p className="mt-6 w-full text-lg leading-relaxed text-on-dark-muted text-justify [text-justify:inter-word]">{lead}</p>
+        <h1 className="mt-4 text-[clamp(2.4rem,5vw,4.4rem)] leading-[1.08] tracking-tight">
+          {title}
+        </h1>
+        <p className="mt-6 w-full text-lg leading-relaxed text-on-dark-muted text-justify [text-justify:inter-word]">
+          {lead}
+        </p>
       </div>
     </section>
   );
 }
 
-export function SectionHead({ index: _index, label, title }: { index?: string; label: string; title: ReactNode }) {
+export function SectionHead({
+  label,
+  title,
+  className = "",
+}: {
+  label: string;
+  title: ReactNode;
+  className?: string;
+}) {
   return (
-    <div className="flex flex-col gap-3">
+    <div className={`flex flex-col gap-3 ${className}`}>
       <p className="eyebrow text-muted-foreground">{label}</p>
       <h2 className="h-section">{title}</h2>
     </div>
@@ -217,14 +280,20 @@ export function ClosingCta() {
         </h2>
         <div className="flex flex-col justify-end gap-6 md:col-span-5 lg:col-span-4 lg:col-start-9">
           <p className="text-on-dark-muted leading-relaxed text-justify [text-justify:inter-word] w-full">
-            O contato inicial serve para entender a demanda. Ele não representa garantia de contratação ou de resultado.
+            O contato inicial serve para entender a demanda. Ele não representa garantia de
+            contratação ou de resultado.
           </p>
           <Link
             to="/contato"
             className="group inline-flex w-fit items-center gap-3 border-b border-sand pb-1 text-on-dark transition-all duration-200 hover:border-white hover:text-sand"
           >
             <span>Solicitar uma análise inicial</span>
-            <span aria-hidden className="transition-transform duration-300 group-hover:translate-x-1.5 text-sand">→</span>
+            <span
+              aria-hidden
+              className="transition-transform duration-300 group-hover:translate-x-1.5 text-sand"
+            >
+              →
+            </span>
           </Link>
         </div>
       </div>

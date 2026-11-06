@@ -7,16 +7,14 @@ export const Route = createFileRoute("/direito-rural")({
   head: () =>
     seo(
       "Direito Rural e Crédito Rural",
-      "Orientação jurídica para produtores rurais sobre crédito rural, contratos, execuções e questões patrimoniais, em linguagem clara."
+      "Orientação jurídica para produtores rurais sobre crédito rural, contratos, execuções e questões patrimoniais, em linguagem clara.",
     ),
   component: () => (
     <EditorialTopicPage
-
       label="Direito rural e crédito rural"
       title={
         <>
-          Quem produz precisa entender os{" "}
-          <em className="text-sand">contratos</em> que assina.
+          Quem produz precisa entender os <em className="text-sand">contratos</em> que assina.
         </>
       }
       lead="Atendemos produtores rurais em questões ligadas ao crédito, aos contratos e às execuções que podem afetar a terra, o maquinário e a continuidade da safra."

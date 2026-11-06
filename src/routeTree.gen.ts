@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AdvocaciaEmpresarialRouteImport } from './routes/advocacia-empresarial'
+import { Route as AnjoDaGuardaRouteImport } from './routes/anjo-da-guarda'
 import { Route as ContatoRouteImport } from './routes/contato'
 import { Route as ConteudoRouteImport } from './routes/conteudo'
 import { Route as DefesaPatrimonialRouteImport } from './routes/defesa-patrimonial'
@@ -25,6 +26,11 @@ const IndexRoute = IndexRouteImport.update({
 const AdvocaciaEmpresarialRoute = AdvocaciaEmpresarialRouteImport.update({
   id: '/advocacia-empresarial',
   path: '/advocacia-empresarial',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AnjoDaGuardaRoute = AnjoDaGuardaRouteImport.update({
+  id: '/anjo-da-guarda',
+  path: '/anjo-da-guarda',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ContatoRoute = ContatoRouteImport.update({
@@ -56,6 +62,7 @@ const MetodologiaRoute = MetodologiaRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/advocacia-empresarial': typeof AdvocaciaEmpresarialRoute
+  '/anjo-da-guarda': typeof AnjoDaGuardaRoute
   '/contato': typeof ContatoRoute
   '/conteudo': typeof ConteudoRoute
   '/defesa-patrimonial': typeof DefesaPatrimonialRoute
@@ -65,6 +72,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/advocacia-empresarial': typeof AdvocaciaEmpresarialRoute
+  '/anjo-da-guarda': typeof AnjoDaGuardaRoute
   '/contato': typeof ContatoRoute
   '/conteudo': typeof ConteudoRoute
   '/defesa-patrimonial': typeof DefesaPatrimonialRoute
@@ -75,6 +83,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/advocacia-empresarial': typeof AdvocaciaEmpresarialRoute
+  '/anjo-da-guarda': typeof AnjoDaGuardaRoute
   '/contato': typeof ContatoRoute
   '/conteudo': typeof ConteudoRoute
   '/defesa-patrimonial': typeof DefesaPatrimonialRoute
@@ -86,6 +95,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/advocacia-empresarial'
+    | '/anjo-da-guarda'
     | '/contato'
     | '/conteudo'
     | '/defesa-patrimonial'
@@ -95,6 +105,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/advocacia-empresarial'
+    | '/anjo-da-guarda'
     | '/contato'
     | '/conteudo'
     | '/defesa-patrimonial'
@@ -104,6 +115,7 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/advocacia-empresarial'
+    | '/anjo-da-guarda'
     | '/contato'
     | '/conteudo'
     | '/defesa-patrimonial'
@@ -114,6 +126,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AdvocaciaEmpresarialRoute: typeof AdvocaciaEmpresarialRoute
+  AnjoDaGuardaRoute: typeof AnjoDaGuardaRoute
   ContatoRoute: typeof ContatoRoute
   ConteudoRoute: typeof ConteudoRoute
   DefesaPatrimonialRoute: typeof DefesaPatrimonialRoute
@@ -135,6 +148,13 @@ declare module '@tanstack/react-router' {
       path: '/advocacia-empresarial'
       fullPath: '/advocacia-empresarial'
       preLoaderRoute: typeof AdvocaciaEmpresarialRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/anjo-da-guarda': {
+      id: '/anjo-da-guarda'
+      path: '/anjo-da-guarda'
+      fullPath: '/anjo-da-guarda'
+      preLoaderRoute: typeof AnjoDaGuardaRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/contato': {
@@ -178,6 +198,7 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AdvocaciaEmpresarialRoute: AdvocaciaEmpresarialRoute,
+  AnjoDaGuardaRoute: AnjoDaGuardaRoute,
   ContatoRoute: ContatoRoute,
   ConteudoRoute: ConteudoRoute,
   DefesaPatrimonialRoute: DefesaPatrimonialRoute,

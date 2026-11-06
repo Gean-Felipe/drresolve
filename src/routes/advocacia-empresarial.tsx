@@ -1,27 +1,26 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { EditorialTopicPage } from "@/components/site/EditorialTopicPage";
 import { seo } from "@/lib/seo";
-import img from "@/assets/empresarial.jpg";
+import img from "@/assets/empresarial.png";
 
 export const Route = createFileRoute("/advocacia-empresarial")({
   head: () =>
     seo(
       "Advocacia Empresarial",
-      "Assessoria jurídica para empresários e gestores de PMEs: contratos, passivos, execuções fiscais, demandas trabalhistas e relações bancárias."
+      "Assessoria jurídica para empresários e gestores de PMEs: contratos, passivos, execuções fiscais, demandas trabalhistas e relações bancárias.",
     ),
   component: () => (
     <EditorialTopicPage
       label="Advocacia empresarial"
       title={
         <>
-          Clareza jurídica para decisões de{" "}
-          <em className="text-sand">negócio.</em>
+          Clareza jurídica para decisões de <em className="text-sand">negócio.</em>
         </>
       }
       lead="Para empresários e gestores que precisam entender os riscos jurídicos da empresa e organizar respostas proporcionais a eles."
       image={{
         src: img,
-        alt: "Fachada de arquitetura corporativa em concreto e madeira",
+        alt: "Ambiente executivo e sala de reuniões corporativa do escritório Dr. Resolve",
         w: 1200,
         h: 1408,
         caption: "Imagem ilustrativa.",
@@ -52,20 +51,8 @@ export const Route = createFileRoute("/advocacia-empresarial")({
           text: "Avaliação de contratos de financiamento, renegociações e cobranças envolvendo instituições financeiras.",
         },
         {
-          highlight: true,
-          eyebrow: "ASSESSORIA JURÍDICA PREVENTIVA",
-          title: "Projeto Anjo da Guarda",
-          subtitle: "Decisões mais seguras começam antes da assinatura.",
-          text: "Uma proposta de acompanhamento jurídico anual para empresários, produtores rurais e pessoas físicas que desejam analisar contratos, avaliar riscos e receber orientação jurídica antes de tomar decisões empresariais ou patrimoniais relevantes.",
-          features: [
-            "Acompanhamento jurídico continuado.",
-            "Análise e revisão prévia de negócios.",
-            "Identificação preventiva de riscos jurídicos.",
-          ],
-          action: {
-            label: "Conhecer o projeto",
-            to: "/contato",
-          },
+          title: "Assessoria preventiva",
+          text: "Orientação contínua para reduzir riscos antes que se transformem em litígio.",
         },
       ]}
       note="Cada empresa tem uma realidade própria. A atuação é definida após a análise dos documentos e não envolve promessa de resultado."
