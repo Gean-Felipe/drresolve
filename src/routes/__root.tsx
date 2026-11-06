@@ -83,6 +83,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
+      { httpEquiv: "Content-Security-Policy", content: "upgrade-insecure-requests" },
       { title: "Dr. Resolve — Advocacia e Consultoria Estratégica" },
       {
         name: "description",
@@ -99,7 +100,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "geo.position", content: "-15.6179;-56.0682" },
       { name: "ICBM", content: "-15.6179, -56.0682" },
       // Verificação Google Search Console
-      ...(gscVerification ? [{ name: "google-site-verification", content: gscVerification }] : []),
+      { name: "google-site-verification", content: gscVerification },
       { property: "og:type", content: "website" },
       { property: "og:site_name", content: "Dr. Resolve Advocacia" },
       { property: "og:locale", content: "pt_BR" },
@@ -144,6 +145,13 @@ function RootShell({ children }: { children: ReactNode }) {
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
   const routerState = useRouterState();
+
+  // Força redirecionamento HTTPS no navegador se carregar em HTTP
+  useEffect(() => {
+    if (typeof window !== "undefined" && window.location.protocol === "http:") {
+      window.location.replace(window.location.href.replace("http:", "https:"));
+    }
+  }, []);
 
   // Inicializa Google Analytics 4
   useEffect(() => {
