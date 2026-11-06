@@ -1,13 +1,27 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { TopicPage } from "@/components/site/TopicPage";
 import { seo } from "@/lib/seo";
+import { getBreadcrumbSchema, getServiceSchema } from "@/lib/schemas";
 
 export const Route = createFileRoute("/defesa-patrimonial")({
   head: () =>
-    seo(
-      "Defesa Patrimonial",
-      "Atuação jurídica em situações envolvendo imóveis, bens e atos de constrição judicial, com análise técnica e dentro dos limites da lei.",
-    ),
+    seo({
+      title: "Defesa Patrimonial e Proteção Jurídica de Bens | Dr. Resolve Advocacia",
+      description:
+        "Atuação jurídica em penhoras, leilões judiciais, avaliação de bens e defesa de imóveis, maquinários e pequenas propriedades rurais nos limites da lei.",
+      pathname: "/defesa-patrimonial",
+      schemas: [
+        getBreadcrumbSchema([
+          { name: "Início", path: "/" },
+          { name: "Defesa Patrimonial", path: "/defesa-patrimonial" },
+        ]),
+        getServiceSchema(
+          "Defesa Patrimonial",
+          "Análise técnica de constrições judiciais, penhoras e leilões de bens de produtores e empresas.",
+          "/defesa-patrimonial",
+        ),
+      ],
+    }),
   component: () => (
     <TopicPage
       label="Defesa patrimonial"

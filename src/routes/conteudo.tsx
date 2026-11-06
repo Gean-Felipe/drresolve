@@ -2,13 +2,22 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Page, PageIntro, ClosingCta } from "@/components/site/Layout";
 import { ArtigosEditorial } from "@/components/site/ArtigosEditorial";
 import { seo } from "@/lib/seo";
+import { getBreadcrumbSchema } from "@/lib/schemas";
 
 export const Route = createFileRoute("/conteudo")({
   head: () =>
-    seo(
-      "Conteúdo Jurídico",
-      "Publicações informativas dedicadas a esclarecer dúvidas frequentes sobre crédito rural, contratos empresariais, execuções e segurança patrimonial.",
-    ),
+    seo({
+      title: "Artigos e Conteúdo Jurídico | Dr. Resolve Advocacia",
+      description:
+        "Publicações jurídicas informativas: orientações sobre crédito rural, execuções, contratos empresariais e segurança patrimonial para empresas e agronegócio.",
+      pathname: "/conteudo",
+      schemas: [
+        getBreadcrumbSchema([
+          { name: "Início", path: "/" },
+          { name: "Conteúdo Jurídico", path: "/conteudo" },
+        ]),
+      ],
+    }),
   component: ConteudoPage,
 });
 

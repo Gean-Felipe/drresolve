@@ -2,13 +2,23 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useState, type FormEvent } from "react";
 import { Page, PageIntro } from "@/components/site/Layout";
 import { seo } from "@/lib/seo";
+import { getBreadcrumbSchema } from "@/lib/schemas";
+import { trackFormSubmission, trackWhatsAppClick } from "@/lib/analytics";
 
 export const Route = createFileRoute("/contato")({
   head: () =>
-    seo(
-      "Contato",
-      "Solicite um contato inicial com o Dr. Resolve. Informe apenas seu nome, um canal de retorno e, se quiser, uma descrição breve.",
-    ),
+    seo({
+      title: "Fale com o Dr. Resolve | Contato e Atendimento Jurídico em MT",
+      description:
+        "Solicite um contato com a equipe Dr. Resolve. Atendimento especializado para produtores rurais e empresários em Cuiabá, Mato Grosso e todo o Brasil.",
+      pathname: "/contato",
+      schemas: [
+        getBreadcrumbSchema([
+          { name: "Início", path: "/" },
+          { name: "Contato", path: "/contato" },
+        ]),
+      ],
+    }),
   component: Contato,
 });
 
@@ -27,7 +37,10 @@ function Contato() {
     if (nome.length < 2) next.nome = "Informe seu nome.";
     if (retorno.length < 6) next.retorno = "Informe um telefone para retorno.";
     setErrors(next);
-    if (Object.keys(next).length === 0) setStatus("pending");
+    if (Object.keys(next).length === 0) {
+      trackFormSubmission("formulario_contato_principal");
+      setStatus("pending");
+    }
   }
 
   const field =
@@ -144,6 +157,7 @@ function Contato() {
                 href="https://wa.me/556598110101"
                 target="_blank"
                 rel="noreferrer"
+                onClick={() => trackWhatsAppClick("pagina_contato")}
                 className="mt-2 inline-flex items-center gap-2 text-sm font-medium text-sand hover:text-coffee transition-colors"
               >
                 <span>Conversar pelo WhatsApp</span>

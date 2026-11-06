@@ -2,14 +2,23 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Page, PageIntro, SectionHead, ClosingCta } from "@/components/site/Layout";
 import { Reveal } from "@/components/site/Reveal";
 import { seo } from "@/lib/seo";
+import { getBreadcrumbSchema } from "@/lib/schemas";
 import documentos from "@/assets/documentos.jpg";
 
 export const Route = createFileRoute("/metodologia")({
   head: () =>
-    seo(
-      "Metodologia de Atendimento",
-      "Como funciona a análise inicial: entrevista minuciosa, leitura dos documentos e explicação franca sobre a viabilidade jurídica de cada demanda.",
-    ),
+    seo({
+      title: "Metodologia de Atendimento Jurídico | Dr. Resolve Advocacia",
+      description:
+        "Como funciona a análise inicial: entrevista minuciosa, leitura dos documentos e explicação franca sobre a viabilidade jurídica de cada demanda.",
+      pathname: "/metodologia",
+      schemas: [
+        getBreadcrumbSchema([
+          { name: "Início", path: "/" },
+          { name: "Metodologia", path: "/metodologia" },
+        ]),
+      ],
+    }),
   component: Metodologia,
 });
 

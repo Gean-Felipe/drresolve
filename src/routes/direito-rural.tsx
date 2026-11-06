@@ -1,14 +1,28 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { EditorialTopicPage } from "@/components/site/EditorialTopicPage";
 import { seo } from "@/lib/seo";
+import { getBreadcrumbSchema, getServiceSchema } from "@/lib/schemas";
 import img from "@/assets/rural-silos.jpg";
 
 export const Route = createFileRoute("/direito-rural")({
   head: () =>
-    seo(
-      "Direito Rural e Crédito Rural",
-      "Orientação jurídica para produtores rurais sobre crédito rural, contratos, execuções e questões patrimoniais, em linguagem clara.",
-    ),
+    seo({
+      title: "Direito Rural e Crédito Rural em MT | Dr. Resolve Advocacia",
+      description:
+        "Assessoria jurídica para produtores rurais: contratos agrários, crédito rural, renegociação de dívidas agrícolas, alongamento e proteção contra penhoras.",
+      pathname: "/direito-rural",
+      schemas: [
+        getBreadcrumbSchema([
+          { name: "Início", path: "/" },
+          { name: "Direito Rural", path: "/direito-rural" },
+        ]),
+        getServiceSchema(
+          "Direito Rural e Crédito Rural",
+          "Assessoria jurídica especializada para produtores rurais e cooperativas sobre crédito agrícola, renegociação e contratos rurais.",
+          "/direito-rural",
+        ),
+      ],
+    }),
   component: () => (
     <EditorialTopicPage
       label="Direito rural e crédito rural"

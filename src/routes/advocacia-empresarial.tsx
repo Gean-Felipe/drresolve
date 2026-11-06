@@ -1,14 +1,28 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { EditorialTopicPage } from "@/components/site/EditorialTopicPage";
 import { seo } from "@/lib/seo";
+import { getBreadcrumbSchema, getServiceSchema } from "@/lib/schemas";
 import img from "@/assets/empresarial.png";
 
 export const Route = createFileRoute("/advocacia-empresarial")({
   head: () =>
-    seo(
-      "Advocacia Empresarial",
-      "Assessoria jurídica para empresários e gestores de PMEs: contratos, passivos, execuções fiscais, demandas trabalhistas e relações bancárias.",
-    ),
+    seo({
+      title: "Advocacia Empresarial para PMEs em MT | Dr. Resolve Advocacia",
+      description:
+        "Assessoria jurídica para empresários e gestores: revisão contratual, gestão de passivos, defesa em execuções fiscais e relações bancárias com segurança.",
+      pathname: "/advocacia-empresarial",
+      schemas: [
+        getBreadcrumbSchema([
+          { name: "Início", path: "/" },
+          { name: "Advocacia Empresarial", path: "/advocacia-empresarial" },
+        ]),
+        getServiceSchema(
+          "Advocacia Empresarial",
+          "Consultoria jurídica preventiva e contenciosa para pequenas e médias empresas.",
+          "/advocacia-empresarial",
+        ),
+      ],
+    }),
   component: () => (
     <EditorialTopicPage
       label="Advocacia empresarial"

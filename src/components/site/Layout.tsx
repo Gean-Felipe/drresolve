@@ -1,6 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { useEffect, useState, type ReactNode } from "react";
 import { Menu, X } from "lucide-react";
+import { trackWhatsAppClick } from "@/lib/analytics";
 
 const nav = [
   { to: "/advocacia-empresarial", label: "Empresarial" },
@@ -137,8 +138,18 @@ export function Footer() {
           <p className="eyebrow text-sand">Navegação & Atuação</p>
           <ul className="mt-5 space-y-3 text-sm text-on-dark-muted">
             <li>
+              <Link to="/direito-rural" className="link-line hover:text-on-dark">
+                Direito rural & crédito
+              </Link>
+            </li>
+            <li>
               <Link to="/advocacia-empresarial" className="link-line hover:text-on-dark">
                 Advocacia empresarial
+              </Link>
+            </li>
+            <li>
+              <Link to="/defesa-patrimonial" className="link-line hover:text-on-dark">
+                Defesa patrimonial
               </Link>
             </li>
             <li>
@@ -172,6 +183,7 @@ export function Footer() {
                 href="https://wa.me/556598110101"
                 target="_blank"
                 rel="noreferrer"
+                onClick={() => trackWhatsAppClick("footer")}
                 className="text-sand hover:text-paper transition-colors"
               >
                 (65) 9811-0101

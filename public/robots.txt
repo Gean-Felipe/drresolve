@@ -1,14 +1,36 @@
+# Robots.txt — Dr. Resolve Advocacia e Consultoria Estratégica
+# Domínio Oficial: https://advdrresolve.com.br
+
 User-agent: Googlebot
 Allow: /
-
+User-agent: Googlebot-Image
+Allow: /
 User-agent: Bingbot
 Allow: /
-
-User-agent: Twitterbot
+User-agent: Slurp
+Allow: /
+User-agent: DuckDuckBot
+Allow: /
+User-agent: Baiduspider
+Allow: /
+User-agent: YandexBot
+Allow: /
+User-agent: Applebot
 Allow: /
 
-User-agent: facebookexternalhit
+# Rastreadores e Agentes de IA / LLMs (GEO - Generative Engine Optimization)
+User-agent: GPTBot
+Allow: /
+User-agent: ChatGPT-User
+Allow: /
+User-agent: Claude-Web
+Allow: /
+User-agent: PerplexityBot
 Allow: /
 
+# Regra Geral
 User-agent: *
 Allow: /
+
+# Sitemap oficial
+Sitemap: https://advdrresolve.com.br/sitemap.xml

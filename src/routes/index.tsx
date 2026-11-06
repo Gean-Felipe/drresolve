@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { Page, SectionHead, ClosingCta } from "@/components/site/Layout";
 import { Reveal } from "@/components/site/Reveal";
 import { seo } from "@/lib/seo";
+import { getLegalServiceSchema, getWebSiteSchema } from "@/lib/schemas";
 import hero from "@/assets/hero-campo.jpg";
 import ruralSilos from "@/assets/rural-silos.jpg";
 import empresarial from "@/assets/empresarial.png";
@@ -9,10 +10,13 @@ import documentos from "@/assets/documentos.jpg";
 
 export const Route = createFileRoute("/")({
   head: () =>
-    seo(
-      "Estratégia jurídica para o patrimônio e a atividade produtiva",
-      "Advocacia e consultoria estratégica para produtores rurais, empresários e gestores, com análise técnica e franca de cada demanda.",
-    ),
+    seo({
+      title: "Dr. Resolve | Advocacia e Consultoria Estratégica em MT",
+      description:
+        "Advocacia estratégica especializada em Direito Rural, Crédito Rural, Defesa Patrimonial e Advocacia Empresarial. Atuação em Mato Grosso e todo o Brasil.",
+      pathname: "/",
+      schemas: [getLegalServiceSchema(), getWebSiteSchema()],
+    }),
   component: Index,
 });
 
@@ -24,13 +28,13 @@ const areas = [
     tags: ["Contratos", "Execuções fiscais", "Relações bancárias"],
   },
   {
-    to: "/conteudo" as const,
+    to: "/direito-rural" as const,
     title: "Direito rural e crédito rural",
     text: "Questões envolvendo contratos rurais, financiamentos, cédulas de crédito e execuções ligadas à atividade agrícola.",
     tags: ["Crédito rural", "Contratos rurais", "Alongamento"],
   },
   {
-    to: "/conteudo" as const,
+    to: "/defesa-patrimonial" as const,
     title: "Defesa patrimonial",
     text: "Análise de situações envolvendo imóveis, maquinário e atos de constrição judicial, dentro dos limites da lei.",
     tags: ["Imóveis", "Penhora", "Leilões judiciais"],

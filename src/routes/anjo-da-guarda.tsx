@@ -2,14 +2,28 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { Page, SectionHead, ClosingCta } from "@/components/site/Layout";
 import { Reveal } from "@/components/site/Reveal";
 import { seo } from "@/lib/seo";
+import { getBreadcrumbSchema, getServiceSchema } from "@/lib/schemas";
 import documentos from "@/assets/documentos.jpg";
 
 export const Route = createFileRoute("/anjo-da-guarda")({
   head: () =>
-    seo(
-      "Projeto Anjo da Guarda",
-      "Assessoria jurídica preventiva especializada para produtores rurais e empresários: diagnóstico de riscos, guarda patrimonial legal e suporte digital contínuo.",
-    ),
+    seo({
+      title: "Projeto Anjo da Guarda | Assessoria Jurídica Preventiva Dr. Resolve",
+      description:
+        "Assessoria jurídica preventiva especializada para produtores rurais e empresários: diagnóstico de riscos, guarda patrimonial legal e suporte digital contínuo.",
+      pathname: "/anjo-da-guarda",
+      schemas: [
+        getBreadcrumbSchema([
+          { name: "Início", path: "/" },
+          { name: "Projeto Anjo da Guarda", path: "/anjo-da-guarda" },
+        ]),
+        getServiceSchema(
+          "Projeto Anjo da Guarda",
+          "Programa contínuo de auditoria de riscos, guarda patrimonial e assessoria jurídica estratégica para empresas e agro.",
+          "/anjo-da-guarda",
+        ),
+      ],
+    }),
   component: AnjoDaGuardaPage,
 });
 

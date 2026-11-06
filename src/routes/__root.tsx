@@ -4,6 +4,7 @@ import {
   Link,
   createRootRouteWithContext,
   useRouter,
+  useRouterState,
   HeadContent,
   Scripts,
   type ErrorComponentProps,
@@ -12,6 +13,7 @@ import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
+import { initGA, trackPageView } from "../lib/analytics";
 
 function NotFoundComponent() {
   return (
@@ -74,6 +76,9 @@ function ErrorComponent({ error, reset }: ErrorComponentProps) {
   );
 }
 
+const gscVerification =
+  (typeof import.meta !== "undefined" && import.meta.env?.VITE_GOOGLE_SITE_VERIFICATION) || "";
+
 export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()({
   head: () => ({
     meta: [
@@ -82,9 +87,23 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { title: "Dr. Resolve — Advocacia e Consultoria Estratégica" },
       {
         name: "description",
-        content: "Advocacia e consultoria estratégica para produtores rurais e empresários.",
+        content:
+          "Advocacia e consultoria estratégica para produtores rurais e empresários em Mato Grosso e em todo o Brasil.",
       },
+      {
+        name: "robots",
+        content: "index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1",
+      },
+      // SEO Local - Metatags Geográficas para Cuiabá / Mato Grosso
+      { name: "geo.region", content: "BR-MT" },
+      { name: "geo.placename", content: "Cuiabá" },
+      { name: "geo.position", content: "-15.6179;-56.0682" },
+      { name: "ICBM", content: "-15.6179, -56.0682" },
+      // Verificação Google Search Console
+      ...(gscVerification ? [{ name: "google-site-verification", content: gscVerification }] : []),
       { property: "og:type", content: "website" },
+      { property: "og:site_name", content: "Dr. Resolve Advocacia" },
+      { property: "og:locale", content: "pt_BR" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
     links: [
@@ -100,6 +119,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       },
       { rel: "icon", href: "/favicon.svg", type: "image/svg+xml" },
       { rel: "alternate icon", href: "/favicon.ico", type: "image/x-icon" },
+      { rel: "canonical", href: "https://advdrresolve.com.br/" },
     ],
   }),
   shellComponent: RootShell,
@@ -124,10 +144,22 @@ function RootShell({ children }: { children: ReactNode }) {
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
+  const routerState = useRouterState();
+
+  // Inicializa Google Analytics 4
+  useEffect(() => {
+    initGA();
+  }, []);
+
+  // Rastreia page views em navegações virtuais SPA
+  useEffect(() => {
+    if (routerState.location.pathname) {
+      trackPageView(routerState.location.pathname);
+    }
+  }, [routerState.location.pathname]);
 
   return (
     <QueryClientProvider client={queryClient}>
-      {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
       <Outlet />
     </QueryClientProvider>
   );
