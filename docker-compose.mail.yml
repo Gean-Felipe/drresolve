@@ -1,0 +1,44 @@
+services:
+  mailserver:
+    image: ghcr.io/docker-mailserver/docker-mailserver:latest
+    container_name: mailserver
+    hostname: mail.advdrresolve.com.br
+    domainname: advdrresolve.com.br
+    ports:
+      - "25:25"
+      - "465:465"
+      - "587:587"
+      - "993:993"
+    volumes:
+      - ./mail-data:/var/mail
+      - ./mail-state:/var/mail-state
+      - ./mail-logs:/var/log/mail
+      - ./config:/tmp/docker-mailserver
+      - /etc/localtime:/etc/localtime:ro
+    environment:
+      - ENABLE_SPAMASSASSIN=1
+      - ENABLE_CLAMAV=0
+      - ENABLE_FAIL2BAN=1
+      - ENABLE_POSTGREY=0
+      - ENABLE_RSPAMD=1
+      - SSL_TYPE=self-signed
+      - ONE_DIR=1
+      - OVERRIDE_HOSTNAME=mail.advdrresolve.com.br
+      - DMS_DEBUG=0
+    cap_add:
+      - NET_ADMIN
+    restart: always
+
+  webmail:
+    image: roundcube/roundcubemail:latest
+    container_name: roundcube-webmail
+    restart: always
+    ports:
+      - "8080:80"
+    environment:
+      - "ROUNDCUBEMAIL_DEFAULT_HOST=ssl://mailserver"
+      - "ROUNDCUBEMAIL_DEFAULT_PORT=993"
+      - "ROUNDCUBEMAIL_SMTP_SERVER=tls://mailserver"
+      - "ROUNDCUBEMAIL_SMTP_PORT=587"
+    depends_on:
+      - mailserver
