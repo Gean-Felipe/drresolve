@@ -1,9 +1,10 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState, type FormEvent } from "react";
+import { useState, useRef, type FormEvent } from "react";
 import { Page, PageIntro } from "@/components/site/Layout";
 import { seo } from "@/lib/seo";
 import { getBreadcrumbSchema } from "@/lib/schemas";
 import { trackFormSubmission, trackWhatsAppClick } from "@/lib/analytics";
+import { submitContactForm } from "@/lib/contact";
 
 export const Route = createFileRoute("/contato")({
   head: () =>
@@ -25,21 +26,45 @@ export const Route = createFileRoute("/contato")({
 type Errors = Partial<Record<"nome" | "retorno", string>>;
 
 function Contato() {
+  const formRef = useRef<HTMLFormElement>(null);
   const [errors, setErrors] = useState<Errors>({});
-  const [status, setStatus] = useState<"idle" | "pending">("idle");
+  const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
+  const [errorMessage, setErrorMessage] = useState<string>("");
 
-  function onSubmit(e: FormEvent<HTMLFormElement>) {
+  async function onSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const f = new FormData(e.currentTarget);
     const nome = String(f.get("nome") || "").trim();
     const retorno = String(f.get("retorno") || "").trim();
+    const descricao = String(f.get("descricao") || "").trim();
+
     const next: Errors = {};
     if (nome.length < 2) next.nome = "Informe seu nome.";
     if (retorno.length < 6) next.retorno = "Informe um telefone para retorno.";
     setErrors(next);
+
     if (Object.keys(next).length === 0) {
       trackFormSubmission("formulario_contato_principal");
-      setStatus("pending");
+      setStatus("submitting");
+      setErrorMessage("");
+
+      try {
+        const res = await submitContactForm({
+          data: { nome, retorno, descricao },
+        });
+
+        if (res.success) {
+          setStatus("success");
+          formRef.current?.reset();
+        } else {
+          setStatus("error");
+          setErrorMessage(res.error || "Não foi possível enviar a mensagem no momento.");
+        }
+      } catch (err) {
+        console.error("Erro ao enviar formulário:", err);
+        setStatus("error");
+        setErrorMessage("Falha de conexão. Por favor, tente novamente ou fale conosco pelo WhatsApp.");
+      }
     }
   }
 
@@ -55,6 +80,7 @@ function Contato() {
       />
       <section className="container-ed grid gap-16 py-20 md:grid-cols-12 md:py-28">
         <form
+          ref={formRef}
           noValidate
           onSubmit={onSubmit}
           className="md:col-span-7"
@@ -73,6 +99,7 @@ function Contato() {
                 className={field}
                 aria-invalid={!!errors.nome}
                 aria-describedby={errors.nome ? "e-nome" : undefined}
+                disabled={status === "submitting"}
               />
               {errors.nome && (
                 <p id="e-nome" className="mt-2 text-sm text-destructive">
@@ -92,6 +119,7 @@ function Contato() {
                 className={field}
                 aria-invalid={!!errors.retorno}
                 aria-describedby={errors.retorno ? "e-retorno" : undefined}
+                disabled={status === "submitting"}
               />
               {errors.retorno && (
                 <p id="e-retorno" className="mt-2 text-sm text-destructive">
@@ -111,6 +139,7 @@ function Contato() {
                 maxLength={500}
                 placeholder="Conte de forma resumida o contexto da sua dúvida ou necessidade..."
                 className={field}
+                disabled={status === "submitting"}
               />
               <p className="mt-2 text-xs text-muted-foreground leading-relaxed">
                 Por sigilo e segurança jurídica, não inclua números de processo, senhas, dados
@@ -120,20 +149,27 @@ function Contato() {
           </div>
           <button
             type="submit"
-            className="mt-10 min-h-12 rounded-sm bg-olive px-8 text-sm font-medium text-on-dark transition-all duration-200 hover:bg-coffee hover:shadow-md focus-visible:outline-2 focus-visible:outline-coffee cursor-pointer"
+            disabled={status === "submitting"}
+            className="mt-10 min-h-12 rounded-sm bg-olive px-8 text-sm font-medium text-on-dark transition-all duration-200 hover:bg-coffee hover:shadow-md focus-visible:outline-2 focus-visible:outline-coffee cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed"
           >
-            Enviar solicitação
+            {status === "submitting" ? "Enviando solicitação..." : "Enviar solicitação"}
           </button>
           <div aria-live="polite">
-            {status === "pending" && (
-              <div className="mt-6 border-l-4 border-sand bg-card p-5 text-sm rounded-r-sm shadow-xs">
-                <p className="font-medium text-foreground">
-                  Formulário demonstrativo de atendimento
+            {status === "success" && (
+              <div className="mt-6 border-l-4 border-olive bg-card p-5 text-sm rounded-r-sm shadow-xs">
+                <p className="font-medium text-foreground text-olive">
+                  Solicitação enviada com sucesso!
                 </p>
                 <p className="mt-1 text-muted-foreground">
-                  O canal de recebimento direto ainda está em fase de homologação pelo escritório.{" "}
-                  <strong>Nenhum dado pessoal foi transmitido externamente</strong>. O envio entrará
-                  em produção assim que os canais corporativos forem validados.
+                  Recebemos seus dados e entraremos em contato o mais breve possível para dar o devido andamento.
+                </p>
+              </div>
+            )}
+            {status === "error" && (
+              <div className="mt-6 border-l-4 border-destructive bg-card p-5 text-sm rounded-r-sm shadow-xs">
+                <p className="font-medium text-destructive">Não foi possível enviar</p>
+                <p className="mt-1 text-muted-foreground">
+                  {errorMessage || "Ocorreu um erro no processamento. Se preferir, fale conosco diretamente pelo WhatsApp."}
                 </p>
               </div>
             )}
@@ -166,7 +202,20 @@ function Contato() {
             </div>
           </div>
 
-          {/* ENDEREÇO (SEM CAMPO DE E-MAIL E SEM DIVISÓRIA ÓRFÃ) */}
+          {/* E-MAIL INSTITUCIONAL */}
+          <div className="border-t border-border pt-6">
+            <p className="eyebrow text-coffee">E-MAIL INSTITUCIONAL</p>
+            <div className="mt-3">
+              <a
+                href="mailto:contato@advdrresolve.com.br"
+                className="text-base font-medium text-foreground hover:text-sand transition-colors"
+              >
+                contato@advdrresolve.com.br
+              </a>
+            </div>
+          </div>
+
+          {/* ENDEREÇO */}
           <div className="border-t border-border pt-6">
             <p className="eyebrow text-coffee">ENDEREÇO</p>
             <div className="mt-3 text-sm leading-relaxed text-muted-foreground">

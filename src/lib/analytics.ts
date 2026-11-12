@@ -102,3 +102,4 @@ export function trackPageView(path: string, title?: string) {
     page_location: window.location.href,
   });
 }
+

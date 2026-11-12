@@ -189,6 +189,15 @@ export function Footer() {
                 (65) 9811-0101
               </a>
             </li>
+            <li className="flex items-start gap-2">
+              <span className="font-medium text-foreground text-on-dark">E-mail:</span>
+              <a
+                href="mailto:contato@advdrresolve.com.br"
+                className="text-sand hover:text-paper transition-colors"
+              >
+                contato@advdrresolve.com.br
+              </a>
+            </li>
             <li className="flex flex-col gap-0.5">
               <span className="font-medium text-foreground text-on-dark">Endereço:</span>
               <span className="text-on-dark-muted">
