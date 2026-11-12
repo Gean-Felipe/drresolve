@@ -2,8 +2,8 @@ services:
   mailserver:
     image: ghcr.io/docker-mailserver/docker-mailserver:latest
     container_name: mailserver
-    hostname: mail.advdrresolve.com.br
-    domainname: advdrresolve.com.br
+    hostname: mail.gfsites.tech
+    domainname: gfsites.tech
     ports:
       - "25:25"
       - "465:465"
@@ -23,7 +23,7 @@ services:
       - ENABLE_RSPAMD=1
       - SSL_TYPE=self-signed
       - ONE_DIR=1
-      - OVERRIDE_HOSTNAME=mail.advdrresolve.com.br
+      - OVERRIDE_HOSTNAME=mail.gfsites.tech
       - DMS_DEBUG=0
     cap_add:
       - NET_ADMIN
